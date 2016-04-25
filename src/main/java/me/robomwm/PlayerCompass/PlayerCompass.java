@@ -23,11 +23,11 @@ public class PlayerCompass extends JavaPlugin implements Listener
 {
     HashMap<Player, Player> trackingPlayers = new HashMap<Player, Player>();
     HashMap<Player, ArrayList<Player>> allowedPlayers = new HashMap<Player, ArrayList<Player>>();
-    String compassHelp = ("§e--------- PlayerCompass -------------------------" +
-            "\n§6/compass allow §e§oplayer§r - Allows §e§oplayer§r to track you." +
-            "\n§6/compass disallow§r - Prevents all players from tracking you" +
-            "\n§6/compass track §e§oplayer§r - Sets your compass to track §e§oplayer" +
-            "\n§6/compass reset§r - Resets compass to your respawn point.");
+    String compassHelp = ("\u00A7e--------- PlayerCompass -------------------------" +
+            "\n\u00A76/compass allow \u00A7e\u00A7oplayer\u00A7r - Allows \u00A7e\u00A7oplayer\u00A7r to track you." +
+            "\n\u00A76/compass disallow\u00A7r - Prevents all players from tracking you" +
+            "\n\u00A76/compass track \u00A7e\u00A7oplayer\u00A7r - Sets your compass to track \u00A7e\u00A7oplayer" +
+            "\n\u00A76/compass reset\u00A7r - Resets compass to your respawn point.");
 
     @Override
     public void onEnable()
