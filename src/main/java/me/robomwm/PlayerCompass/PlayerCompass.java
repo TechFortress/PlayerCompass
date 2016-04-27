@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by Robo on 4/24/2016.
@@ -22,7 +22,7 @@ import java.util.HashMap;
 public class PlayerCompass extends JavaPlugin implements Listener
 {
     HashMap<Player, Player> trackingPlayers = new HashMap<Player, Player>();
-    HashMap<Player, ArrayList<Player>> allowedPlayers = new HashMap<Player, ArrayList<Player>>();
+    HashMap<Player, HashSet<Player>> allowedPlayers = new HashMap<Player, HashSet<Player>>();
     String compassHelp = ("\u00A7e--------- PlayerCompass -------------------------" +
             "\n\u00A76/compass allow \u00A7e\u00A7oplayer\u00A7r - Allows \u00A7e\u00A7oplayer\u00A7r to track you." +
             "\n\u00A76/compass disallow\u00A7r - Prevents all players from tracking you" +
@@ -59,7 +59,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 }
                 //If player hasn't allowed anyone before, add to hashmap
                 if (!allowedPlayers.containsKey(player))
-                    allowedPlayers.put(player, new ArrayList<Player>());
+                    allowedPlayers.put(player, new HashSet<Player>());
                     //otherwise first check if they already allowed the allowee
                 else if (allowedPlayers.get(player).contains(allowee))
                 {
