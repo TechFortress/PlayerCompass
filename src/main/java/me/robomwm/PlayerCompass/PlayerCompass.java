@@ -84,7 +84,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                     return true;
                 }
 
-                final Player target = Bukkit.getPlayerExact(args[2]);
+                final Player target = Bukkit.getPlayerExact(args[1]);
                 //Check if target is invalid or invisible player
                 if (target == null || !player.canSee(target))
                 {
