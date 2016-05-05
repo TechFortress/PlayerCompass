@@ -1,0 +1,6 @@
+name: PlayerCompass
+author: RoboMWM
+version: ${project.version}
+main: me.robomwm.PlayerCompass.PlayerCompass
+commands:
+    compass: {}
