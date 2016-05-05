@@ -51,9 +51,9 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 return true;
             }
 
-            else if (args.length > 1 && args[0].toLowerCase().equals("allow"))
+            else if (args.length > 1 && args[0].equals("allow"))
             {
-                Player allowee = Bukkit.getPlayerExact(args[0]);
+                Player allowee = Bukkit.getPlayerExact(args[1]);
                 //Is allowee online/valid
                 if (allowee == null)
                 {
@@ -80,7 +80,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 //First check if player is holding a compass
                 if (!(player.getInventory().getItemInMainHand().getType().equals(Material.COMPASS) || player.getInventory().getItemInOffHand().getType().equals(Material.COMPASS)))
                 {
-                    player.sendMessage(ChatColor.RED + "You need to be holding a compass to track a player");
+                    player.sendMessage(ChatColor.RED + "You need to be holding a compass in your hand to track a player");
                     return true;
                 }
 
