@@ -57,7 +57,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 //Is allowee online/valid
                 if (allowee == null)
                 {
-                    player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.BLUE + args[1] + ChatColor.RED + " is online or a valid name.");
+                    player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.AQUA + args[1] + ChatColor.RED + " is online or a valid name.");
                     return true;
                 }
                 //If player hasn't allowed anyone before, add to hashmap
@@ -102,8 +102,8 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 //Check if target isn't allowing player
                 if (!allowedPlayers.containsKey(target) || !allowedPlayers.get(target).equals(player))
                 {
-                    player.sendMessage(ChatColor.BLUE + target.getName() + ChatColor.RED + " has not allowed you to track them.");
-                    player.sendMessage(ChatColor.BLUE + target.getName() + ChatColor.RED + " needs to run" + ChatColor.GOLD + " /compass allow " + player.getName() + " to allow you to track them.");
+                    player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.RED + " has not allowed you to track them.");
+                    player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.RED + " needs to run" + ChatColor.GOLD + " /compass allow " + player.getName() + " to allow you to track them.");
                     return true;
                 }
 
@@ -149,7 +149,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
             else if (args[0].toLowerCase().equals("reset"))
             {
                 player.setCompassTarget(player.getBedSpawnLocation());
-                player.sendMessage(ChatColor.BLUE + "Resetting compass to your respawn point.");
+                player.sendMessage(ChatColor.GREEN + "Resetting compass to your respawn point.");
                 return true;
             }
         }
