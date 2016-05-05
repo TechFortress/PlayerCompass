@@ -25,9 +25,9 @@ public class PlayerCompass extends JavaPlugin implements Listener
     HashMap<Player, HashSet<Player>> allowedPlayers = new HashMap<Player, HashSet<Player>>();
     String compassHelp = ("\u00A7e--------- PlayerCompass -------------------------" +
             "\n\u00A76/compass allow \u00A7e\u00A7oplayer\u00A7r - Allows \u00A7e\u00A7oplayer\u00A7r to track you." +
-            "\n\u00A76/compass disallow\u00A7r - Prevents all players from tracking you" +
-            "\n\u00A76/compass track \u00A7e\u00A7oplayer\u00A7r - Sets your compass to track \u00A7e\u00A7oplayer" +
-            "\n\u00A76/compass reset\u00A7r - Resets compass to your respawn point.");
+            "\n\u00A76/compass disallow\u00A7r - Disallows all players from tracking you." +
+            "\n\u00A76/compass track \u00A7e\u00A7oplayer\u00A7r - Sets your compass to track \u00A7e\u00A7oplayer." +
+            "\n\u00A76/compass reset\u00A7r - Resets compass to track spawn");
 
     @Override
     public void onEnable()
@@ -66,12 +66,12 @@ public class PlayerCompass extends JavaPlugin implements Listener
                     //otherwise first check if they already allowed the allowee
                 else if (allowedPlayers.get(player).contains(allowee))
                 {
-                    player.sendMessage(ChatColor.GREEN + "You already allowed " + allowee.getName() + " to track you.");
+                    player.sendMessage(ChatColor.GREEN + "You already allowed " + ChatColor.AQUA + allowee.getName() + ChatColor.GREEN + " to track you.");
                     return true;
                 }
 
                 allowedPlayers.get(player).add(allowee);
-                player.sendMessage(ChatColor.GREEN + "You allowed " + allowee.getName() + " to track you.");
+                player.sendMessage(ChatColor.GREEN + "You allowed " +  ChatColor.AQUA + allowee.getName() + ChatColor.GREEN + " to track you.");
                 return true;
             }
 
@@ -80,7 +80,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 //First check if player is holding a compass
                 if (!(player.getInventory().getItemInMainHand().getType().equals(Material.COMPASS) || player.getInventory().getItemInOffHand().getType().equals(Material.COMPASS)))
                 {
-                    player.sendMessage(ChatColor.RED + "You need to be holding a compass in your hand to track a player");
+                    player.sendMessage(ChatColor.RED + "You need to be holding a compass in your hand to track a player.");
                     return true;
                 }
 
@@ -108,7 +108,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 }
 
                 trackingPlayers.put(player, target);
-                player.sendMessage(ChatColor.GREEN + "Your compass is now tracking " + target.getName());
+                player.sendMessage(ChatColor.GREEN + "Your compass is now tracking " + target.getName() + ".");
 
                 new BukkitRunnable()
                 {
@@ -121,7 +121,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                             //Cancel task if target is offline
                         else if (!target.isOnline())
                         {
-                            player.sendMessage(ChatColor.RED + target.getName() + " is offline. Resetting compass to your respawn point.");
+                            player.sendMessage(ChatColor.RED + target.getName() + " is offline. Resetting compass to spawn.");
                             player.setCompassTarget(player.getBedSpawnLocation());
                             this.cancel();
                         }
@@ -129,7 +129,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                         //Cancel task if target removed player from their allowedPlayers
                         else if (!trackingPlayers.containsKey(target) || !allowedPlayers.get(target).contains(player))
                         {
-                            player.sendMessage(ChatColor.RED + target.getName() + " is no longer allowing you to track them. Resetting compass to your respawn point.");
+                            player.sendMessage(ChatColor.RED + target.getName() + " is no longer allowing you to track them. Resetting compass to spawn.");
                             player.setCompassTarget(player.getBedSpawnLocation());
                             this.cancel();
                         }
@@ -143,13 +143,13 @@ public class PlayerCompass extends JavaPlugin implements Listener
             {
                 if (allowedPlayers.containsKey(player))
                     allowedPlayers.remove(player);
-                player.sendMessage(ChatColor.GREEN + "Prevents all players from track you");
+                player.sendMessage(ChatColor.GREEN + "Disallowed all players from tracking you.");
             }
 
             else if (args[0].toLowerCase().equals("reset"))
             {
                 player.setCompassTarget(player.getBedSpawnLocation());
-                player.sendMessage(ChatColor.GREEN + "Resetting compass to your respawn point.");
+                player.sendMessage(ChatColor.GREEN + "Resetting compass to spawn.");
                 return true;
             }
         }
@@ -162,9 +162,6 @@ public class PlayerCompass extends JavaPlugin implements Listener
         if (allowedPlayers.containsKey(event.getPlayer()))
             allowedPlayers.remove(event.getPlayer());
         if (trackingPlayers.containsKey(event.getPlayer()))
-        {
             trackingPlayers.remove(event.getPlayer());
-            event.getPlayer().setCompassTarget(event.getPlayer().getBedSpawnLocation());
-        }
     }
 }
