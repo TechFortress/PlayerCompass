@@ -45,8 +45,11 @@ public class PlayerCompass extends JavaPlugin implements Listener
 
         if (cmd.getName().equalsIgnoreCase("compass"))
         {
-            if (args.length < 1)
+            if (args.length < 1) //sends /compass with no args
+            {
                 player.sendMessage(compassHelp);
+                return true;
+            }
 
             else if (args.length > 1 && args[0].toLowerCase().equals("allow"))
             {
@@ -75,7 +78,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
             else if (args.length > 1 && args[0].toLowerCase().equals("track"))
             {
                 //First check if player is holding a compass
-                if (!(player.getInventory().getItemInMainHand().equals(Material.COMPASS) || player.getInventory().getItemInOffHand().equals(Material.COMPASS)))
+                if (!(player.getInventory().getItemInMainHand().getType().equals(Material.COMPASS) || player.getInventory().getItemInOffHand().getType().equals(Material.COMPASS)))
                 {
                     player.sendMessage(ChatColor.RED + "You need to be holding a compass to track a player");
                     return true;
@@ -85,7 +88,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 //Check if target is invalid or invisible player
                 if (target == null || !player.canSee(target))
                 {
-                    player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.BLUE + args[1] + ChatColor.RED + " is online or a valid name.");
+                    player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.AQUA + args[1] + ChatColor.RED + " is online or a valid name.");
                     return true;
                 }
 
@@ -149,8 +152,6 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 player.sendMessage(ChatColor.BLUE + "Resetting compass to your respawn point.");
                 return true;
             }
-
-            player.sendMessage(compassHelp);
         }
         return true;
     }
