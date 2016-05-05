@@ -122,7 +122,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                         else if (!target.isOnline())
                         {
                             player.sendMessage(ChatColor.RED + target.getName() + " is offline. Resetting compass to spawn.");
-                            player.setCompassTarget(player.getBedSpawnLocation());
+                            player.setCompassTarget(player.getWorld().getSpawnLocation());
                             this.cancel();
                         }
 
@@ -130,7 +130,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
                         else if (!trackingPlayers.containsKey(target) || !allowedPlayers.get(target).contains(player))
                         {
                             player.sendMessage(ChatColor.RED + target.getName() + " is no longer allowing you to track them. Resetting compass to spawn.");
-                            player.setCompassTarget(player.getBedSpawnLocation());
+                            player.setCompassTarget(player.getWorld().getSpawnLocation());
                             this.cancel();
                         }
                         else
@@ -148,7 +148,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
 
             else if (args[0].toLowerCase().equals("reset"))
             {
-                player.setCompassTarget(player.getBedSpawnLocation());
+                player.setCompassTarget(player.getWorld().getSpawnLocation());
                 player.sendMessage(ChatColor.GREEN + "Resetting compass to spawn.");
                 return true;
             }
