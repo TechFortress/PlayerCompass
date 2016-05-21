@@ -141,13 +141,13 @@ public class PlayerCompass extends JavaPlugin implements Listener
 
             else if (args[0].toLowerCase().equals("disallow"))
             {
-                if (allowedPlayers.containsKey(player))
-                    allowedPlayers.remove(player);
+                allowedPlayers.remove(player);
                 player.sendMessage(ChatColor.GREEN + "Disallowed all players from tracking you.");
             }
 
             else if (args[0].toLowerCase().equals("reset"))
             {
+                trackingPlayers.remove(player);
                 player.setCompassTarget(player.getWorld().getSpawnLocation());
                 player.sendMessage(ChatColor.GREEN + "Resetting compass to spawn.");
                 return true;
@@ -159,9 +159,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void removeAllowedPlayersOnQuit(PlayerQuitEvent event)
     {
-        if (allowedPlayers.containsKey(event.getPlayer()))
-            allowedPlayers.remove(event.getPlayer());
-        if (trackingPlayers.containsKey(event.getPlayer()))
-            trackingPlayers.remove(event.getPlayer());
+        allowedPlayers.remove(event.getPlayer());
+        trackingPlayers.remove(event.getPlayer());
     }
 }
