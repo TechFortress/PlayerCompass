@@ -54,8 +54,8 @@ public class PlayerCompass extends JavaPlugin implements Listener
             else if (args.length > 1 && args[0].equals("allow"))
             {
                 Player allowee = Bukkit.getPlayerExact(args[1]);
-                //Is allowee online/valid
-                if (allowee == null)
+                //Check if allowee is online and visible
+                if (allowee == null || !player.cansee(allowee))
                 {
                     player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.AQUA + args[1] + ChatColor.RED + " is online or a valid name.");
                     return true;
