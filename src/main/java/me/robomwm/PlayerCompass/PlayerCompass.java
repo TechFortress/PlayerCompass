@@ -55,7 +55,7 @@ public class PlayerCompass extends JavaPlugin implements Listener
             {
                 Player allowee = Bukkit.getPlayerExact(args[1]);
                 //Check if allowee is online and visible
-                if (allowee == null || !player.cansee(allowee))
+                if (allowee == null || !player.canSee(allowee))
                 {
                     player.sendMessage(ChatColor.RED + "Doesn't look like " + ChatColor.AQUA + args[1] + ChatColor.RED + " is online or a valid name.");
                     return true;
@@ -137,12 +137,14 @@ public class PlayerCompass extends JavaPlugin implements Listener
                             player.setCompassTarget(target.getLocation());
                     }
                 }.runTaskTimer(this, 5L, 300L);
+                return true;
             }
 
             else if (args[0].toLowerCase().equals("disallow"))
             {
                 allowedPlayers.remove(player);
                 player.sendMessage(ChatColor.GREEN + "Disallowed all players from tracking you.");
+                return true;
             }
 
             else if (args[0].toLowerCase().equals("reset"))
@@ -153,6 +155,8 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 return true;
             }
         }
+        //Not enough arguments
+        sender.sendMessage(compassHelp);
         return true;
     }
 
