@@ -100,10 +100,10 @@ public class PlayerCompass extends JavaPlugin implements Listener
                 }
 
                 //Check if target isn't allowing player
-                if (!allowedPlayers.containsKey(target) || !allowedPlayers.get(target).equals(player))
+                if (!allowedPlayers.containsKey(target) || !allowedPlayers.get(target).contains(player))
                 {
                     player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.RED + " has not allowed you to track them.");
-                    player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.RED + " needs to run" + ChatColor.GOLD + " /compass allow " + player.getName() + " to allow you to track them.");
+                    player.sendMessage(ChatColor.AQUA + target.getName() + ChatColor.RED + " needs to run" + ChatColor.GOLD + " /compass allow " + player.getName() + ChatColor.RED + " to allow you to track them.");
                     return true;
                 }
 
